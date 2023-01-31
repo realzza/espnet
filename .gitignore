@@ -82,6 +82,7 @@ tools/py3mmseg
 tools/anaconda
 tools/ice-g2p
 tools/fairseq
+tools/RawNet
 tools/._*
 
 # tts related
@@ -97,3 +98,7 @@ egs/an4/asr1/
 egs2/librispeech_100/slurm/
 egs2/fsc/asr1/fluent_speech_commands_dataset/
 egs2/meld/
+tools/anaconda
+tools/ice-g2p*
+tools/fairseq*
+tools/featbin*
