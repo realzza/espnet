@@ -10,7 +10,7 @@ n_fft=1024
 n_shift=256
 win_length=null
 
-tag="lib100_vits_tts_16k_char_xvector"
+tag="beta_lib100_vits_tts_all16k_char_xvector"
 
 train_set="train_clean_100"
 valid_set="dev_clean"
@@ -40,7 +40,7 @@ local_data_opts="--trim_all_silence true" # trim all silence in the audio
     --test_sets "${test_sets}" \
     --tag "${tag}" \
     --srctexts "data/${train_set}/text" \
-    --inference_model train.total_count.ave.pth \
+    --inference_model train.total_count.best.pth \
     --inference_config "${inference_config}" \
     --audio_format "wav" "$@"
     
