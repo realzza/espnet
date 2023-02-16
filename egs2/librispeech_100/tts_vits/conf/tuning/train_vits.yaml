@@ -112,7 +112,7 @@ tts_conf:
         average_by_layers: false         # whether to average loss value by #layers of each discriminator
         include_final_outputs: true      # whether to include final outputs for loss calculation
     mel_loss_params:
-        fs: 22050          # must be the same as the training data
+        fs: 16000          # must be the same as the training data
         n_fft: 1024        # fft points
         hop_length: 256    # hop size
         win_length: null   # window length
@@ -127,7 +127,7 @@ tts_conf:
     lambda_dur: 1.0        # loss scaling coefficient for duration loss
     lambda_kl: 1.0         # loss scaling coefficient for KL divergence loss
     # others
-    sampling_rate: 22050          # needed in the inference for saving wav
+    sampling_rate: 16000          # needed in the inference for saving wav
     cache_generator_outputs: true # whether to cache generator outputs in the training
 
 ##########################################################
@@ -159,7 +159,7 @@ generator_first: false # whether to start updating generator first
 #                OTHER TRAINING SETTING                  #
 ##########################################################
 num_iters_per_epoch: 1000 # number of iterations per epoch
-max_epoch: 100            # number of epochs
+max_epoch: 250            # number of epochs
 accum_grad: 1             # gradient accumulation
 batch_bins: 5000000       # batch bins (feats_type=raw)
 batch_type: numel         # how to make batch
