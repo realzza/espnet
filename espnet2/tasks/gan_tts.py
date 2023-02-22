@@ -524,16 +524,17 @@ class GANTTSTask(AbsTask):
                 **args.model_conf,
             )
 
-        model = ESPnetGANTTSModel(
-            feats_extract=feats_extract,
-            normalize=normalize,
-            pitch_extract=pitch_extract,
-            pitch_normalize=pitch_normalize,
-            energy_extract=energy_extract,
-            energy_normalize=energy_normalize,
-            tts=tts,
-            **args.model_conf,
-        )
+        else:
+            model = ESPnetGANTTSModel(
+                feats_extract=feats_extract,
+                normalize=normalize,
+                pitch_extract=pitch_extract,
+                pitch_normalize=pitch_normalize,
+                energy_extract=energy_extract,
+                energy_normalize=energy_normalize,
+                tts=tts,
+                **args.model_conf,
+            )
         assert check_return_type(model)
         return model
 

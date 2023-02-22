@@ -265,6 +265,8 @@ class VITSGenerator(torch.nn.Module):
         sids: Optional[torch.Tensor] = None,
         spembs: Optional[torch.Tensor] = None,
         lids: Optional[torch.Tensor] = None,
+        s_embed: Optional[torch.Tensor] = None,
+        s_embed_lens: Optional[torch.Tensor] = None,
     ) -> Tuple[
         torch.Tensor,
         torch.Tensor,
@@ -333,7 +335,11 @@ class VITSGenerator(torch.nn.Module):
                 g = g + g_
 
         # forward posterior encoder
-        z, m_q, logs_q, y_mask = self.posterior_encoder(feats, feats_lengths, g=g)
+        if s_embed is not None:
+            z, m_q, logs_q, y_mask = self.posterior_encoder(s_embed, s_embed_lens, g=g)
+            # z, m_q, logs_q, y_mask = self.posterior_encoder(feats, feats_lengths, g=g)
+        else:
+            z, m_q, logs_q, y_mask = self.posterior_encoder(feats, feats_lengths, g=g)
 
         # forward flow
         z_p = self.flow(z, y_mask, g=g)  # (B, H, T_feats)

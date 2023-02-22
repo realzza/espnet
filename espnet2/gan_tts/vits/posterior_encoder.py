@@ -83,7 +83,12 @@ class PosteriorEncoder(torch.nn.Module):
         self.proj = Conv1d(hidden_channels, out_channels * 2, 1)
 
     def forward(
-        self, x: torch.Tensor, x_lengths: torch.Tensor, g: Optional[torch.Tensor] = None
+        self, 
+        x: torch.Tensor, 
+        x_lengths: torch.Tensor, 
+        g: Optional[torch.Tensor] = None,
+        s_embed: Optional[torch.Tensor] = None,
+        s_embed_lens: Optional[torch.Tensor] = None,
     ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         """Calculate forward propagation.
 
@@ -99,6 +104,22 @@ class PosteriorEncoder(torch.nn.Module):
             Tensor: Mask tensor for input tensor (B, 1, T_feats).
 
         """
+        # if s_embed is not None:
+        #     x_mask = (
+        #         make_non_pad_mask(s_embed_lens)
+        #         .unsqueeze(1)
+        #         .to(
+        #             dtype=s_embed.dtype,
+        #             device=s_embed.device,
+        #         )
+        #     )
+        #     x = self.input_conv(s_embed) * x_mask
+        #     x = self.encoder(x, x_mask, g=g)
+        #     stats = self.proj(x) * x_mask
+        #     m, logs = stats.split(states.size(1) // 2, dim=1)
+        #     z = (m + torch.randn_like(m) * torch.exp(logs)) * x_mask
+
+        # else:
         x_mask = (
             make_non_pad_mask(x_lengths)
             .unsqueeze(1)
