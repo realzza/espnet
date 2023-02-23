@@ -21,7 +21,7 @@ inference_config=conf/tuning/decode_vits.yaml
 local_data_opts="--trim_all_silence true" # trim all silence in the audio
 
 ./tts.sh \
-    --ngpu 1 \
+    --ngpu 2 \
     --lang en \
     --feats_type raw \
     --fs "${fs}" \
