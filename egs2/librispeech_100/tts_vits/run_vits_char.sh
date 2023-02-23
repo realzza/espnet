@@ -22,6 +22,8 @@ local_data_opts="--trim_all_silence true" # trim all silence in the audio
 
 ./tts.sh \
     --ngpu 2 \
+    --stage 6 \
+    --stop_stage 6 \
     --lang en \
     --feats_type raw \
     --fs "${fs}" \
