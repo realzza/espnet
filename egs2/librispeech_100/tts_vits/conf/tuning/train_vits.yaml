@@ -15,7 +15,7 @@ tts_conf:
     # generator related
     generator_type: vits_generator
     generator_params:
-        hidden_channels: 192
+        hidden_channels: 256
         spks: -1
         global_channels: -1
         segment_size: 32
@@ -168,7 +168,7 @@ grad_noise: false         # whether to use gradient noise injection
 sort_in_batch: descending # how to sort data in making batch
 sort_batch: descending    # how to sort created batches
 num_workers: 4            # number of workers of data loader
-use_amp: false            # whether to use pytorch amp
+use_amp: true            # whether to use pytorch amp
 log_interval: 50          # log interval in iterations
 keep_nbest_models: 10     # number of models to keep
 num_att_plot: 3           # number of attention figures to be saved in every check
