@@ -31,7 +31,7 @@ local_data_opts="--trim_all_silence true" # trim all silence in the audio
     --n_shift "${n_shift}" \
     --win_length "${win_length}" \
     --dumpdir dump/16k_xvector_char \
-    --expdir exp/16k_xvector_char \
+    --expdir exp/16k_xvector_char_sa \
     --tts_task gan_tts \
     --use_xvector true \
     --token_type char \
