@@ -6,11 +6,11 @@ set -u
 set -o pipefail
 
 fs=16000 # original 24000
-n_fft=2048
-n_shift=300
-win_length=1200
+n_fft=1024
+n_shift=256
+win_length=null
 
-tag="char_lib100_vits_tts_all16k_xvector"
+tag="cyclic_aligned1024_char_lib100_vits_tts_16k_xvector"
 
 train_set="train_clean_100"
 valid_set="dev_clean"
@@ -20,8 +20,10 @@ train_config=conf/tuning/train_char_vits.yaml
 inference_config=conf/tuning/decode_vits.yaml
 local_data_opts="--trim_all_silence true" # trim all silence in the audio
 
+export CUDA_VISIBLE_DEVICES=1
+
 ./tts.sh \
-    --ngpu 2 \
+    --ngpu 1 \
     --stage 6 \
     --stop_stage 6 \
     --lang en \
@@ -31,7 +33,7 @@ local_data_opts="--trim_all_silence true" # trim all silence in the audio
     --n_shift "${n_shift}" \
     --win_length "${win_length}" \
     --dumpdir dump/16k_xvector_char \
-    --expdir exp/16k_xvector_char_sa \
+    --expdir exp/16k_xvector_char_mini \
     --tts_task gan_tts \
     --use_xvector true \
     --token_type char \

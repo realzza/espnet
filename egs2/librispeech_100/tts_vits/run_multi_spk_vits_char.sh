@@ -6,11 +6,11 @@ set -u
 set -o pipefail
 
 fs=16000 # original 24000
-n_fft=2048
-n_shift=300
-win_length=1200
+n_fft=1024
+n_shift=256
+win_length=null
 
-tag="multi_spk_char_lib100_vits_tts_all16k_xvector"
+tag="multi_spk_char_lib100_vits_tts_all16k_xvector_128"
 
 train_set="train_clean_100"
 valid_set="dev_clean"
@@ -35,7 +35,6 @@ local_data_opts="--trim_all_silence true" # trim all silence in the audio
     --tts_task gan_tts \
     --use_xvector true \
     --token_type char \
-    --cleaner none \
     --feats_extract linear_spectrogram \
     --feats_normalize none \
     --train_config "${train_config}" \
