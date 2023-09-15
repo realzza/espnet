@@ -90,10 +90,6 @@ if [ $# -ne 0 ]; then
     exit 2
 fi
 
-if [[ "$(basename "$(pwd)")" != tts* ]]; then
-    log "Error: You must cd to a tts directory"
-    exit 1
-fi
 
 if [ -z "${split_sets}" ]; then
     log "Error: You need to add the split sets with --split_sets <train> <dev> <tests>"
@@ -117,7 +113,7 @@ if [ -n "${language}" ]; then
         g2p_model="${language}"
     fi
 fi
-   
+
 if [ -z "${acoustic_model}" ]; then
     log "ERROR: You need to add <language> or <acoustic_model>."
     exit 1
@@ -245,9 +241,9 @@ if [ ${stage} -le 3 ] && [ ${stop_stage} -ge 3 ]; then
             "${g2p_model}" \
             "${tempdir}/corpus_validate_pretrained/oovs_found_${dictionary}.txt" \
             "${oov_dict}"
-    
+
     cat "${src_dict}" "${oov_dict}" > "${workdir}/${dictionary}.dict"
-    
+
     # # Validate data set with acoustics.
     log "Validating corpus..."
     ${train_cmd} ${tempdir}/logs/validate.log \
